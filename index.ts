@@ -4,7 +4,6 @@ let themeLabel = document.querySelector('#theme-choice') as HTMLLabelElement;
 let slider = document.querySelector('input[type="range"]') as HTMLInputElement;
 let resultDisplay = document.querySelector('#display-screen') as HTMLDivElement;
 
-slider.style.setProperty('--slider-thumb-bg-color', 'pink')
 
 // A callback function that modifies the top section
 function topSectionUpdate(nameColor: string, themeNameColor: string, labelColor: string, thumbColor: string, sliderColor: string):void {
