@@ -4,7 +4,11 @@ let themeName = document.querySelector('#theme-name');
 let themeLabel = document.querySelector('#theme-choice');
 let slider = document.querySelector('input[type="range"]');
 let resultDisplay = document.querySelector('#display-screen');
-slider.style.setProperty('--slider-thumb-bg-color', 'pink');
+let inputButtons = document.querySelector('#input-buttons');
+let numberOperators = document.querySelectorAll('.number-operator');
+let deleteButton = document.querySelector('#delete');
+let resetButton = document.querySelector('#reset');
+let equalButton = document.querySelector('#equal');
 // A callback function that modifies the top section
 function topSectionUpdate(nameColor, themeNameColor, labelColor, thumbColor, sliderColor) {
     /**
@@ -22,7 +26,7 @@ function topSectionUpdate(nameColor, themeNameColor, labelColor, thumbColor, sli
     slider.style.backgroundColor = sliderColor;
     slider.style.setProperty('--slider-thumb-bg-color', thumbColor);
 }
-// A callback function the modifies the display screen
+// A callback function that modifies the display screen
 function updateDisplayScreen(bgColor, textColor) {
     /**
      * This function updates the background and foreground colors of the display screen
@@ -32,4 +36,34 @@ function updateDisplayScreen(bgColor, textColor) {
      */
     resultDisplay.style.backgroundColor = bgColor;
     resultDisplay.style.color = textColor;
+}
+// A callbcak function that modifies the input buttons sections
+function updateInputButtons(mainBGColor, numOperatorBG, numOperatorBorderBottom, delBG, delBorderBottom, equalBG, equalBorderBottom, numTextColor, delTextColor) {
+    /**
+     * This function updates the colors of the various buttons
+     * @param mainBGColor: string -> new background color for the main buttons container
+     * @param numOperatorBG: string -> new background color for the number/operator buttons
+     * @param numOperatorBorderBottom: string -> new border bottom color for the number/operator buttons
+     * @param delBG: string -> new background color for the delete/reset buttons
+     * @param delBorderBottom: string -> new border bottom color for the delete/reset buttons
+     * @param equalBG: string -> new background color for the equal button
+     * @param equalBorderBottom: string -> new color for the border bottom of the equal button
+     * @param numTextColor: string -> new color for the text on the buttons
+     * @param delTextColor: string -> new color for the text on the delete and reset buttons
+     * @returns void
+     */
+    inputButtons.style.backgroundColor = mainBGColor;
+    numberOperators.forEach((ele) => {
+        ele.style.backgroundColor = numOperatorBG;
+        ele.style.borderBottomColor = numOperatorBorderBottom;
+        ele.style.color = numTextColor;
+    });
+    deleteButton.style.backgroundColor = delBG;
+    deleteButton.style.borderBottomColor = delBorderBottom;
+    deleteButton.style.color = delTextColor;
+    resetButton.style.backgroundColor = delBG;
+    resetButton.style.borderBottomColor = delBorderBottom;
+    resetButton.style.color = delTextColor;
+    equalButton.style.backgroundColor = equalBG;
+    equalButton.style.borderBottomColor = equalBorderBottom;
 }
