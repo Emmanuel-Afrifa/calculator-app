@@ -61,7 +61,7 @@ body {
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    width: 45px;
+    width: 65px;
     height: 15px;
     background-color: hsl(223, 31%, 20%);
     border-radius: 15px;
@@ -90,9 +90,9 @@ input[type="range"]:hover::-webkit-slider-thumb {
 
 #choice-marker {
     display: inline-block;
-    width: 57px;
-    letter-spacing: 3px;
-    padding-left: 8px;
+    width: 68px;
+    letter-spacing: 7px;
+    padding-left: 10px;
     color: hsl(0, 0%, 100%);
 }
 

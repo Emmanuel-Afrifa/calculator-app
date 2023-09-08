@@ -1,6 +1,6 @@
 let calcHeading = document.querySelector('#calc-heading') as  HTMLHeadingElement;
 let themeName = document.querySelector('#theme-name') as HTMLHeadingElement;
-let themeLabel = document.querySelector('#theme-choice') as HTMLLabelElement;
+let themeLabel = document.querySelector('#theme-choice') as HTMLInputElement;
 let slider = document.querySelector('input[type="range"]') as HTMLInputElement;
 let resultDisplay = document.querySelector('#display-screen') as HTMLDivElement;
 let inputButtons = document.querySelector('#input-buttons') as HTMLDivElement;
@@ -9,6 +9,7 @@ let deleteButton = document.querySelector('#delete') as HTMLButtonElement;
 let resetButton = document.querySelector('#reset') as HTMLButtonElement;
 let equalButton = document.querySelector('#equal') as HTMLButtonElement;
 
+console.log(themeLabel.value)
 
 // A callback function that modifies the top section
 function topSectionUpdate(nameColor: string, themeNameColor: string, labelColor: string, thumbColor: string, sliderColor: string):void {
