@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+:root {
+    --slider-thumb-bg-color: hsl(6, 63%, 50%);
+    --slider-thumb-bg-hover: hsl(6, 63%, 60%);
+}
+
 body {
     margin: 0px;
     padding: 0px;
@@ -75,12 +80,12 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     width: 12px;
     height: 12px;
-    background-color: hsl(6, 63%, 50%);
+    background-color: var(--slider-thumb-bg-color);
     cursor: pointer;
 }
 
 input[type="range"]:hover::-webkit-slider-thumb {
-    background-color: hsl(6, 63%, 60%);
+    background-color: var(--slider-thumb-bg-hover);
 }
 
 #choice-marker {
