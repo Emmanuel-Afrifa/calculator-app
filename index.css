@@ -70,7 +70,6 @@ input[type="range"] {
     padding-top: 2px;
     padding-bottom: 2px;
     cursor: pointer;
-
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -182,6 +181,7 @@ button {
     background-color: hsl(6, 63%, 50%);
     border-bottom: 3px solid hsl(6, 70%, 34%);
     color: hsl(0, 0%, 100%);
+    padding-top: 7px;
 }
 
 #equal:hover {
