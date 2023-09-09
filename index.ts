@@ -9,11 +9,46 @@ let numberOperators = document.querySelectorAll<HTMLButtonElement>('.number-oper
 let deleteButton = document.querySelector('#delete') as HTMLButtonElement;
 let resetButton = document.querySelector('#reset') as HTMLButtonElement;
 let equalButton = document.querySelector('#equal') as HTMLButtonElement;
-
+let numberButtons = document.querySelectorAll<HTMLButtonElement>('.number');
+let plusButton = document.querySelector('#plus') as HTMLButtonElement;
+let minusButton = document.querySelector('#minus') as HTMLButtonElement;
+let multiplictionButton = document.querySelector('#multiplication') as HTMLButtonElement;
+let divisionButton = document.querySelector('#division') as HTMLButtonElement;
 
 window.addEventListener('load', () => {
     slider.value = '1'
 })
+
+// Adding an event listener to the delete button 
+deleteButton.addEventListener('click', () => {
+    resultDisplay.innerText = resultDisplay.innerText.slice(0,-1);
+})
+
+// Adding an event listener to the reset button
+resetButton.addEventListener('click', () => {
+    resultDisplay.innerText = '';
+})
+
+
+// Adding an event listener to the numbers
+numberOperators.forEach((element: HTMLButtonElement) => {
+    element.addEventListener('click', (event: MouseEvent) => {    
+        if (element.id === 'delete') { return }
+        if ((element.id === 'plus' || element.id === 'minus' || element.id === 'division' || element.id === 'multiplication'
+        ) && resultDisplay.innerText === '') { return }
+        let previousEntry = resultDisplay.innerText;
+        let currentEntry = previousEntry + (<HTMLButtonElement>event.target).innerText;
+        resultDisplay.innerText = currentEntry;
+    })
+})
+
+// Adding an event listener to the equal button
+equalButton.addEventListener('click', () => {
+    if (resultDisplay.innerText === '') { return };
+    let result = eval(resultDisplay.innerText.replace('x', '*'))
+    resultDisplay.innerText = result;
+})
+
 
 /* Adding the mouseover event to the buttons depending on the theme chosen */
 // TOGGLE 

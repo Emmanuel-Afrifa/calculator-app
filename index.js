@@ -10,8 +10,44 @@ let numberOperators = document.querySelectorAll('.number-operator');
 let deleteButton = document.querySelector('#delete');
 let resetButton = document.querySelector('#reset');
 let equalButton = document.querySelector('#equal');
+let numberButtons = document.querySelectorAll('.number');
+let plusButton = document.querySelector('#plus');
+let minusButton = document.querySelector('#minus');
+let multiplictionButton = document.querySelector('#multiplication');
+let divisionButton = document.querySelector('#division');
 window.addEventListener('load', () => {
     slider.value = '1';
+});
+// Adding an event listener to the delete button 
+deleteButton.addEventListener('click', () => {
+    resultDisplay.innerText = resultDisplay.innerText.slice(0, -1);
+});
+// Adding an event listener to the reset button
+resetButton.addEventListener('click', () => {
+    resultDisplay.innerText = '';
+});
+// Adding an event listener to the numbers
+numberOperators.forEach((element) => {
+    element.addEventListener('click', (event) => {
+        if (element.id === 'delete') {
+            return;
+        }
+        if ((element.id === 'plus' || element.id === 'minus' || element.id === 'division' || element.id === 'multiplication') && resultDisplay.innerText === '') {
+            return;
+        }
+        let previousEntry = resultDisplay.innerText;
+        let currentEntry = previousEntry + event.target.innerText;
+        resultDisplay.innerText = currentEntry;
+    });
+});
+// Adding an event listener to the equal button
+equalButton.addEventListener('click', () => {
+    if (resultDisplay.innerText === '') {
+        return;
+    }
+    ;
+    let result = eval(resultDisplay.innerText.replace('x', '*'));
+    resultDisplay.innerText = result;
 });
 /* Adding the mouseover event to the buttons depending on the theme chosen */
 // TOGGLE 
