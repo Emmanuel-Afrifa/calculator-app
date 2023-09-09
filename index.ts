@@ -46,7 +46,17 @@ numberOperators.forEach((element: HTMLButtonElement) => {
 equalButton.addEventListener('click', () => {
     if (resultDisplay.innerText === '') { return };
     let result = eval(resultDisplay.innerText.replace('x', '*'))
-    resultDisplay.innerText = result;
+    let newResult = result.toString().split('');
+    let counter = 0
+    for (let i = newResult.length - 1; i>=0 ; i-- ){
+        counter += 1
+        if (newResult.length === 3) { break; }
+        if (counter % 3 === 0){
+            newResult.splice(i,0,',')
+        }
+    }
+
+    resultDisplay.innerText = newResult.join('');
 })
 
 

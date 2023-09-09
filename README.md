@@ -22,8 +22,8 @@ This is a solution to the [Calculator app challenge on Frontend Mentor](https://
 
 
 ### Links
-- [Github repository](#)
-- [Deployed site](#)
+- [Github repository](https://github.com/Emmanuel-Afrifa/calculator-app)
+- [Deployed site](https://basic-calculator-sol.netlify.app/)
 
 ## Process
 ### Tools Used
