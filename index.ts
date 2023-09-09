@@ -55,8 +55,12 @@ equalButton.addEventListener('click', () => {
             newResult.splice(i,0,',')
         }
     }
+    newResult = newResult.join('')
+    if (newResult.startsWith(',')){
+        newResult = newResult.slice(1);
+    }
 
-    resultDisplay.innerText = newResult.join('');
+    resultDisplay.innerText = newResult;
 })
 
 

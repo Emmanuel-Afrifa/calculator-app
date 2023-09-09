@@ -58,7 +58,11 @@ equalButton.addEventListener('click', () => {
             newResult.splice(i, 0, ',');
         }
     }
-    resultDisplay.innerText = newResult.join('');
+    newResult = newResult.join('');
+    if (newResult.startsWith(',')) {
+        newResult = newResult.slice(1);
+    }
+    resultDisplay.innerText = newResult;
 });
 /* Adding the mouseover event to the buttons depending on the theme chosen */
 // TOGGLE 
