@@ -32,12 +32,23 @@ resetButton.addEventListener('click', () => {
 
 // Adding an event listener to the numbers
 numberOperators.forEach((element: HTMLButtonElement) => {
-    element.addEventListener('click', (event: MouseEvent) => {    
+    element.addEventListener('click', (event: MouseEvent) => { 
+        let specialCharacters = ['+', '-', '/', 'x', '.'];   
         if (element.id === 'delete') { return }
         if ((element.id === 'plus' || element.id === 'minus' || element.id === 'division' || element.id === 'multiplication'
         ) && resultDisplay.innerText === '') { return }
         let previousEntry = resultDisplay.innerText;
-        let currentEntry = previousEntry + (<HTMLButtonElement>event.target).innerText;
+        let previousEntryLength = previousEntry.length;
+        let currentEntry: string;
+        let currentValue = (<HTMLButtonElement>event.target).innerText
+        for (let i=0; i<specialCharacters.length; i++){
+            if ((previousEntry[previousEntryLength-1] === specialCharacters[i] && currentValue === specialCharacters[i])) {
+                currentEntry = previousEntry;
+                resultDisplay.innerText = currentEntry;
+                return;
+            }    
+        }   
+        currentEntry = previousEntry + (<HTMLButtonElement>event.target).innerText;
         resultDisplay.innerText = currentEntry;
     })
 })
@@ -63,16 +74,18 @@ equalButton.addEventListener('click', () => {
         let newInputString = inputString.join('')
         let result = eval(newInputString.replace('x', '*'))
         let newResult = result.toString().split('');
-        let counter = 0
         if (newResult.length > 3){
-            for (let i = newResult.length - 1; i>=0 ; i-- ){
-                counter += 1;
-                if (counter % 3 === 0){
-                    newResult.splice(i,0,',')
-                }
-                console.log(newResult[i])
-            }
-            if (newResult[0] === ',') { console.log('boom'); newResult.shift()}
+            if (newResult.includes('.')){
+                let decimalIndex = newResult.indexOf('.');
+                let wholeString = newResult.slice(0,decimalIndex);
+                let decimalString = newResult.slice(decimalIndex + 1);
+                wholeString = additionOfCommas(wholeString)
+                wholeString.push('.')
+                newResult = wholeString.concat(decimalString);
+           }
+           else {
+                newResult =  additionOfCommas(newResult)
+           }
         }
         console.log(newResult)
         resultDisplay.innerText = newResult.join('')
@@ -80,20 +93,41 @@ equalButton.addEventListener('click', () => {
     else {
         let newResult = resultDisplay.innerText.split('')
         if (resultDisplay.innerText.length > 3){
-            let counter = 0
             if (newResult.length > 3){
-                for (let i = newResult.length - 1; i>=0 ; i-- ){
-                    counter += 1;
-                    if (counter % 3 === 0){
-                        newResult.splice(i,0,',')
-                    }
-                }
+               if (newResult.includes('.')){
+                    let decimalIndex = newResult.indexOf('.');
+                    let wholeString = newResult.slice(0,decimalIndex);
+                    let decimalString = newResult.slice(decimalIndex + 1);
+                    wholeString = additionOfCommas(wholeString)
+                    wholeString.push('.')
+                    newResult = wholeString.concat(decimalString);
+               }
+               else {
+                    newResult =  additionOfCommas(newResult)
+               }
             }
         }
         resultDisplay.innerText = newResult.join('')
     }
     
 })
+
+// Declaring a function that adds commas at the appropriate places
+function additionOfCommas(inputArray: string[]): string[]{
+    /**
+     * @param inputArray: string[] -> array of strings which we wish to insert commas at the appropriate places
+     * @returns string[] -> a new array of strings with commas inserted at the right places
+     */
+    let counter = 0;
+    for (let i = inputArray.length - 1; i>=0 ; i-- ){
+        counter += 1;
+        if (counter % 3 === 0){
+            inputArray.splice(i,0,',')
+        }
+    }
+    if (inputArray[0] === ',') { inputArray.shift() }
+    return inputArray;
+}
 
 
 /* Adding the mouseover event to the buttons depending on the theme chosen */
