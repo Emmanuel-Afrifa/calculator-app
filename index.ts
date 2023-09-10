@@ -44,23 +44,55 @@ numberOperators.forEach((element: HTMLButtonElement) => {
 
 // Adding an event listener to the equal button
 equalButton.addEventListener('click', () => {
-    if (resultDisplay.innerText === '') { return };
-    let result = eval(resultDisplay.innerText.replace('x', '*'))
-    let newResult = result.toString().split('');
-    let counter = 0
-    for (let i = newResult.length - 1; i>=0 ; i-- ){
-        counter += 1
-        if (newResult.length === 3) { break; }
-        if (counter % 3 === 0){
-            newResult.splice(i,0,',')
+    let operators = ['+', '-', '/', 'x'];
+    let determiner: boolean = false;
+    for (let i=0; i<operators.length; i++){
+        if (resultDisplay.innerText.includes(operators[i])){
+            determiner = true;
         }
     }
-    newResult = newResult.join('')
-    if (newResult.startsWith(',')){
-        newResult = newResult.slice(1);
-    }
 
-    resultDisplay.innerText = newResult;
+    if (determiner){
+        if (resultDisplay.innerText === '') { return };
+        let inputString = resultDisplay.innerText.split('');
+        for (let j = 0;j < inputString.length; j++){
+            if (inputString[j] === ','){
+                inputString.splice(j,1);
+            }
+        }
+        let newInputString = inputString.join('')
+        let result = eval(newInputString.replace('x', '*'))
+        let newResult = result.toString().split('');
+        let counter = 0
+        if (newResult.length > 3){
+            for (let i = newResult.length - 1; i>=0 ; i-- ){
+                counter += 1;
+                if (counter % 3 === 0){
+                    newResult.splice(i,0,',')
+                }
+                console.log(newResult[i])
+            }
+            if (newResult[0] === ',') { console.log('boom'); newResult.shift()}
+        }
+        console.log(newResult)
+        resultDisplay.innerText = newResult.join('')
+    }
+    else {
+        let newResult = resultDisplay.innerText.split('')
+        if (resultDisplay.innerText.length > 3){
+            let counter = 0
+            if (newResult.length > 3){
+                for (let i = newResult.length - 1; i>=0 ; i-- ){
+                    counter += 1;
+                    if (counter % 3 === 0){
+                        newResult.splice(i,0,',')
+                    }
+                }
+            }
+        }
+        resultDisplay.innerText = newResult.join('')
+    }
+    
 })
 
 
