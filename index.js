@@ -29,7 +29,7 @@ resetButton.addEventListener('click', () => {
 // Adding an event listener to the numbers
 numberOperators.forEach((element) => {
     element.addEventListener('click', (event) => {
-        let specialCharacters = ['+', '-', '/', 'x', '.'];
+        let specialCharacters = ['+', '-', '/', 'x'];
         if (element.id === 'delete') {
             return;
         }
@@ -41,7 +41,18 @@ numberOperators.forEach((element) => {
         let currentEntry;
         let currentValue = event.target.innerText;
         for (let i = 0; i < specialCharacters.length; i++) {
-            if ((previousEntry[previousEntryLength - 1] === specialCharacters[i] && currentValue === specialCharacters[i])) {
+            if (currentValue === '.' && previousEntry[previousEntryLength - 1] === '.') {
+                currentEntry = previousEntry;
+                resultDisplay.innerText = currentEntry;
+                return;
+            }
+            else if ((previousEntry[previousEntryLength - 1] === specialCharacters[i] && currentValue === specialCharacters[i])) {
+                currentEntry = previousEntry;
+                resultDisplay.innerText = currentEntry;
+                return;
+            }
+            else if ((specialCharacters.includes(previousEntry[previousEntryLength - 1]) && specialCharacters.includes(currentValue))
+                && currentValue !== '-') {
                 currentEntry = previousEntry;
                 resultDisplay.innerText = currentEntry;
                 return;

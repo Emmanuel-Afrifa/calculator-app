@@ -33,7 +33,7 @@ resetButton.addEventListener('click', () => {
 // Adding an event listener to the numbers
 numberOperators.forEach((element: HTMLButtonElement) => {
     element.addEventListener('click', (event: MouseEvent) => { 
-        let specialCharacters = ['+', '-', '/', 'x', '.'];   
+        let specialCharacters = ['+', '-', '/', 'x'];   
         if (element.id === 'delete') { return }
         if ((element.id === 'plus' || element.id === 'minus' || element.id === 'division' || element.id === 'multiplication'
         ) && resultDisplay.innerText === '') { return }
@@ -41,12 +41,24 @@ numberOperators.forEach((element: HTMLButtonElement) => {
         let previousEntryLength = previousEntry.length;
         let currentEntry: string;
         let currentValue = (<HTMLButtonElement>event.target).innerText
+        
         for (let i=0; i<specialCharacters.length; i++){
-            if ((previousEntry[previousEntryLength-1] === specialCharacters[i] && currentValue === specialCharacters[i])) {
+            if (currentValue === '.' && previousEntry[previousEntryLength-1] === '.'){
                 currentEntry = previousEntry;
                 resultDisplay.innerText = currentEntry;
                 return;
-            }    
+            }
+            else if ((previousEntry[previousEntryLength-1] === specialCharacters[i] && currentValue === specialCharacters[i])) {
+                currentEntry = previousEntry;
+                resultDisplay.innerText = currentEntry;
+                return;
+            }   
+            else if ((specialCharacters.includes(previousEntry[previousEntryLength-1]) && specialCharacters.includes(currentValue))
+            && currentValue !== '-'){
+                currentEntry = previousEntry;
+                resultDisplay.innerText = currentEntry;
+                return;
+            } 
         }   
         currentEntry = previousEntry + (<HTMLButtonElement>event.target).innerText;
         resultDisplay.innerText = currentEntry;
