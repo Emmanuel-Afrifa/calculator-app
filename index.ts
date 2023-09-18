@@ -99,7 +99,6 @@ equalButton.addEventListener('click', () => {
                 newResult =  additionOfCommas(newResult)
            }
         }
-        console.log(newResult)
         resultDisplay.innerText = newResult.join('')
     }
     else {
@@ -134,7 +133,11 @@ function additionOfCommas(inputArray: string[]): string[]{
     for (let i = inputArray.length - 1; i>=0 ; i-- ){
         counter += 1;
         if (counter % 3 === 0){
+            if (inputArray[i-1] === ',' || inputArray[i] === ','){
+                return inputArray;
+            }
             inputArray.splice(i,0,',')
+
         }
     }
     if (inputArray[0] === ',') { inputArray.shift() }
